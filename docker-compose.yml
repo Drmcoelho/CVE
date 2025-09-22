@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  cve-app:
+    build: .
+    ports:
+      - "8080:80"
+    container_name: cve-course
+    restart: unless-stopped
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    volumes:
+      - ./logs:/var/log/nginx
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - cve-network
+
+  # Optional: Add a reverse proxy for production
+  reverse-proxy:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./proxy.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - cve-app
+    restart: unless-stopped
+    networks:
+      - cve-network
+    profiles:
+      - production
+
+networks:
+  cve-network:
+    driver: bridge
+
+volumes:
+  logs:
+    driver: local
