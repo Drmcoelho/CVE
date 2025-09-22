@@ -1,0 +1,41 @@
+{
+  "course": {
+    "title": "CVE - Cardiovascular Emergencies with ECG",
+    "description": "Comprehensive course on cardiovascular emergencies focusing on ECG interpretation and emergency management",
+    "version": "1.0.0",
+    "duration": "40 hours",
+    "prerequisites": ["Basic medical knowledge", "Anatomy and physiology"],
+    "target_audience": "Healthcare professionals, medical students, emergency responders"
+  },
+  "modules": [
+    {
+      "id": "01_introduction",
+      "title": "Introduction to Cardiovascular Emergencies",
+      "duration": "8 hours",
+      "description": "Overview of cardiovascular system and common emergencies"
+    },
+    {
+      "id": "02_ecg_fundamentals",
+      "title": "ECG Fundamentals and Interpretation",
+      "duration": "12 hours",
+      "description": "Basic ECG reading, normal rhythms, and common abnormalities"
+    },
+    {
+      "id": "03_cardiac_emergencies",
+      "title": "Cardiac Emergency Management",
+      "duration": "15 hours",
+      "description": "Recognition and management of acute cardiac conditions"
+    },
+    {
+      "id": "04_assessment",
+      "title": "Assessment and Case Studies",
+      "duration": "5 hours",
+      "description": "Practical assessments and real-world case studies"
+    }
+  ],
+  "assessment": {
+    "passing_score": 80,
+    "retake_policy": "Up to 3 attempts",
+    "certification": "CVE Certificate upon completion"
+  }
+}

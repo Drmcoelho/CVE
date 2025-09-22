@@ -1,0 +1,41 @@
+{
+  "name": "CVE Course Development",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-toolsai.jupyter",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "/usr/local/bin/python3"
+      }
+    }
+  },
+
+  "postCreateCommand": "echo 'CVE Course Development Environment Ready!' && echo 'Available tools: GitHub CLI, Node.js, Python, Jupyter' && echo 'Start with: cd course && ls -la'",
+  
+  "forwardPorts": [3000, 8080, 8888],
+  
+  "mounts": [
+    "source=${localWorkspaceFolder}/course,target=/workspace/course,type=bind"
+  ],
+
+  "remoteUser": "codespace"
+}
