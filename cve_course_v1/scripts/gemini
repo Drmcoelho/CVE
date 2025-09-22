@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Shim local para simular uma "Gemini CLI" usando o gerador offline do projeto.
+# Uso compatível com um subconjunto:
+#   gemini text -m <modelo> <mensagem>
+#   echo "mensagem" | gemini text -m <modelo>
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROMPTS_JSON="$SCRIPT_DIR/../prompts/banks/domain_specific.json"
+
+subcmd="${1:-}"
+if [ "$subcmd" != "text" ]; then
+  echo "Uso: gemini text -m <modelo> <mensagem>" >&2
+  exit 2
+fi
+shift || true
+# ignorar -m <modelo> se presente
+if [ "${1:-}" = "-m" ]; then
+  shift || true
+  : "${1:-}"  # modelo
+  shift || true || true
+fi
+
+if [ $# -gt 0 ]; then
+  MSG="$*"
+else
+  # lê da stdin
+  if [ -t 0 ]; then
+    echo "Forneça a mensagem após 'text' ou via stdin" >&2
+    exit 2
+  fi
+  MSG="$(cat)"
+fi
+
+python3 "$SCRIPT_DIR/llm_offline.py" "$PROMPTS_JSON" "$MSG"
