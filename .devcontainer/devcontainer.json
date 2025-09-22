@@ -1,0 +1,58 @@
+{
+  "name": "CVE Course Environment",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-python.python",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-json"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "github.copilot.enable": {
+          "*": true,
+          "yaml": true,
+          "plaintext": true,
+          "markdown": true
+        }
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "forwardPorts": [3000, 8000, 8080, 5000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Frontend Dev Server",
+      "onAutoForward": "notify"
+    },
+    "8000": {
+      "label": "Backend API",
+      "onAutoForward": "notify"
+    },
+    "8080": {
+      "label": "Course Platform",
+      "onAutoForward": "notify"
+    },
+    "5000": {
+      "label": "Development Server",
+      "onAutoForward": "notify"
+    }
+  },
+  "remoteUser": "codespace"
+}
