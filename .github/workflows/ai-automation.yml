@@ -1,0 +1,70 @@
+name: AI-Powered Course Automation
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Run every 6 hours
+  workflow_dispatch:
+    inputs:
+      task_type:
+        description: 'Type of automation task'
+        required: true
+        default: 'content_update'
+        type: choice
+        options:
+        - content_update
+        - course_optimization
+        - student_feedback
+        - deployment_check
+
+jobs:
+  ai-automation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup GitHub CLI
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    
+    - name: Install GitHub CLI
+      run: |
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+        sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+        sudo apt update
+        sudo apt install gh -y
+    
+    - name: Setup Python for AI Integration
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install AI Dependencies
+      run: |
+        pip install openai google-generativeai requests
+    
+    - name: Run AI Automation Script
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        TASK_TYPE: ${{ github.event.inputs.task_type || 'content_update' }}
+      run: |
+        python scripts/ai_automation.py
+    
+    - name: Commit and Push Changes
+      if: success()
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🤖 AI-powered course update: ${{ env.TASK_TYPE }}"
+          git push
+        fi
