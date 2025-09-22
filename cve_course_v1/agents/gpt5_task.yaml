@@ -1,0 +1,5 @@
+task: "Gerar/Refinar conteúdo de módulo do curso"
+inputs:
+  - file: "prompts/banks/domain_specific.json"
+  - arg: "texto_solicitado"
+output: "stdout"

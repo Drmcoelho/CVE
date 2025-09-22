@@ -1,0 +1,17 @@
+site_name: Arritmias Cardioversáveis & Cardioversão
+repo_url: https://github.com/Drmcoelho/CVE
+theme:
+  name: mkdocs
+nav:
+  - Início: index.md
+  - Módulos:
+      - M1 — Mecanismos & Instabilidade: modules/m1_mecanismos_instabilidade.md
+      - M2 — Indicações & Contraindicações: modules/m2_indicacoes_contraindicacoes.md
+      - M3 — Energia, Pads & Técnica: modules/m3_energia_pads_tecnica.md
+      - M4 — Cenários Especiais (CMH, WPW, cocaína, pediatria): modules/m4_especiais.md
+      - M5 — Fluxos de Decisão & Documentação: modules/m5_fluxos_documentacao.md
+      - M6 — Taquiarritmias complexas: modules/m6_taquiarritmias_complexas.md
+  - Casos:
+      - FA por cocaína (instável): cases/case_fa_cocaina.md
+  - Cheatsheets:
+      - A5 — CVE por FA instável: cheatsheets/a5_fa_instavel.md

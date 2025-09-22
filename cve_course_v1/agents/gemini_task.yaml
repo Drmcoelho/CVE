@@ -1,0 +1,5 @@
+task: "Revisar e criticar algoritmo clínico"
+inputs:
+  - file: "prompts/banks/domain_specific.json"
+  - arg: "pergunta"
+output: "stdout"

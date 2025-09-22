@@ -1,0 +1,34 @@
+{
+  "domain": "arrhythmias_cardioversion",
+  "style": {
+    "tone": "clínico, direto, sem rodeios",
+    "constraints": [
+      "precisão",
+      "tempo é miocárdio",
+      "documentação objetiva"
+    ]
+  },
+  "prompts": [
+    {
+      "id": "module_outline",
+      "goal": "Gerar outline ultra-prático do módulo {modulo} com bullets acionáveis e 3 exercícios de caso.",
+      "inputs": [
+        "modulo"
+      ],
+      "guardrails": [
+        "nada de floreio",
+        "não atrasar a CVE em casos instáveis"
+      ]
+    },
+    {
+      "id": "note_template",
+      "goal": "Escrever nota de prontuário em 4 linhas conforme modelo de instabilidade.",
+      "inputs": [
+        "sinais",
+        "monitor",
+        "energia",
+        "desfecho"
+      ]
+    }
+  ]
+}
