@@ -64,4 +64,6 @@ Use `./scripts/llm_gpt5.sh` e `./scripts/llm_gemini.sh` para geração/revisão 
 ./scripts/llm_gemini.sh prompts/banks/domain_specific.json "Revisar algoritmo de decisão"
 ```
 
+> Dica: `./scripts/00_bootstrap.sh` registra logs em `/tmp/mkdocs_bootstrap.log` (tentativas via pip/apt). Se o ambiente tiver proxy ou bloqueio de rede, configure-o ou instale o MkDocs manualmente (`pip install mkdocs`) antes de rodar `mkdocs build`/`mkdocs serve`.
+
 > Substitua as variáveis de ambiente **OPENAI_API_KEY** e **GOOGLE_API_KEY** no ambiente Codespaces/host.
